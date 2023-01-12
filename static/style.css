@@ -1,0 +1,53 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body { 
+  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+  
+  font-size: 19px ; 
+  height: 100% ;
+  overflow: hidden;
+}
+     #panel { 
+      float: left;
+    position: relative;
+    background-color: aliceblue;
+     }
+   
+svg { 
+  //border: solid white 1px;
+  border-radius : 200px ;  
+ display: block ; 
+ margin: auto  ; 
+ margin-top:   115px ;  
+}
+  .track {
+    stroke-width: 1;
+    stroke: lightgrey;
+    fill: none;
+
+}
+
+.progress {
+    stroke-width: 5;
+    stroke: rgb(205, 49, 49);
+    fill: none;
+    transform: rotateY(180deg);
+    transform-origin: center;
+    
+}
+.lines  { 
+  stroke: rgb(255, 255, 255);
+}
+.active {
+  stroke: rgb(72, 255, 0);
+}
+#sunset:hover {
+  stroke: rgb(171, 45, 25);
+}

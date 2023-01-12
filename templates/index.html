@@ -1,0 +1,44 @@
+<!DOCTYPE html  >
+<html lang="en">
+
+<head >
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{url_for('static', filename='jquery-3.2.1.js')}}"></script>
+<!-- <script src="{{url_for('static', filename='roundslider.js')}}"></script> -->
+<script src="{{url_for('static', filename='moment.min.js')}}"></script>
+
+<script src="{{url_for('static', filename='script.js')}}"></script>
+
+<title>Clock</title>
+
+</head>
+
+<body>
+
+ <div id="panel">
+ 
+  </div>
+
+  <svg width="400" height="400" >
+    <line class="lines" id="sunset"    x1="50%" y1="50%"   x2="0%" y2="50%"   />
+    <line class="lines"  id="half_night"    x1="50%" y1="50%"   x2="50%" y2="100%"   />
+    <line class="lines"  id="night_last_third"    x1="50%" y1="50%"   x2="79%" y2="100%"   />
+    <line class="lines"  id="sunrise"    x1="50%" y1="50%"   x2="100%" y2="50%"   />
+    <line class="lines"  id="day_first_quarter"    x1="50%" y1="50%"   x2="100%" y2="0%"   />
+    
+    <line class="lines"  id="noon"    x1="50%" y1="50%"   x2="50%" y2="0%"   />
+    <line class="lines"  id="asr"    x1="50%" y1="50%"   x2="00%" y2="0%"  />
+    <line class="lines"  id="icha"    x1="50%" y1="50%"   x2="0%" y2="67.7%"  />
+    <line class="lines"  id="fadjr"    x1="50%" y1="50%"   x2="100%" y2="67.7%"  />
+      
+      
+    <circle r="200" cx="200" cy="200" class="track"></circle>
+    <circle r="200" cx="200" cy="200" class="progress"></circle>
+          
+    </svg>
+
+
+</body>
+</html>
+
