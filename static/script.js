@@ -4,11 +4,11 @@ setInterval(updateTimes, 1000)
 function updateTimes() {   
 
 $.getJSON('/Times', {
-  lat : "36.800069" ,  //event.latLng.lat(),
-  lng : "3.042835"  ,  //event.latLng.lng(), 
+  lat : "36.805069" ,  //event.latLng.lat(),
+  lng : "3.041835"  ,  //event.latLng.lng(), 
   //date : moment.utc().local().format('YYYY-MM-DD HH:mm:ss'),
   date : moment.utc().format('YYYY-MM-DD HH:mm:ss'),
-  elevation : "0" , //document.getElementsByName("elevation")[0].value,
+  elevation : "35" , //document.getElementsByName("elevation")[0].value,
   horizon : 0  //document.getElementsByName("horizon_selection")[0].value ,
 }, function(pythonResponse) {
     let percent =  pythonResponse["percent"]
@@ -25,7 +25,7 @@ $.getJSON('/Times', {
         let circumference = radius * 2 * Math.PI;
         progressCircle.style.strokeDasharray = circumference;
         
-        setProgress(percent)
+        setProgress(percent ) 
 
         switch (pythonResponse["next_time"] )   { 
           case "icha" :

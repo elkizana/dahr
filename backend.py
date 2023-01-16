@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template
-import datetime, ephem
+import datetime, ephem , math
 from datetime import timedelta
 from flask import Flask, request, render_template, jsonify
 
@@ -25,7 +25,7 @@ def Times():
     next_sunrise = ephem.localtime(myLocation.next_rising(ephem.Sun(), use_center=True) )
     prev_sunrise = ephem.localtime(myLocation.previous_rising(ephem.Sun(), use_center=True) )
     next_noon  = ephem.localtime( myLocation.next_transit(ephem.Sun() )   )
-    prev_noon  = ephem.localtime( myLocation.previous_transit(ephem.Sun() )   )
+    prev_noon  = myLocation.previous_transit(ephem.Sun() )   
     next_sunset = ephem.localtime(myLocation.next_setting(ephem.Sun(), use_center=False)  )
     prev_sunset = ephem.localtime(myLocation.previous_setting( ephem.Sun(), use_center=False) )
     icha = ephem.localtime(myLocation18.next_setting(ephem.Sun(), use_center=False)  )
@@ -38,8 +38,22 @@ def Times():
     night_time = next_sunrise.timestamp() - prev_sunset.timestamp()
     day_time = next_sunset.timestamp() - prev_sunrise.timestamp()
 
-    asr =  next_sunset - ((next_sunset - prev_sunrise )/ 4 )
+    asrtime =  datetime.datetime(2023,1,16,15,37,0)
 
+        
+    print ( datetime.datetime.fromtimestamp( next_sunset.timestamp() -  11.6861800697 / 50 * day_time) )
+    
+    asr = datetime.datetime.fromtimestamp( next_sunset.timestamp() -  11.6861800697 / 50 * day_time)
+
+    """ 
+    shadow _ of asr 16/01 : :: 2.582816646707519
+    icha ::  5.454546421705379
+    nisf  :: 50.00
+    fadjr :: 44.4439564315093
+    last_third : 33.3333333333
+     asr :::: 38.31381993034258 ::: 11.6861800697  :: 88.3138199303
+    
+    """
 
     listOftimes = {"sunset" : next_sunset ,"half_night" : half_night , "icha" : icha , "fadjr" : fadjr , "sunrise" : next_sunrise  , "next_noon" : next_noon , "asr" : asr   }
     listOftimes =  dict(sorted(listOftimes.items(), key=lambda item: item[1]))   
