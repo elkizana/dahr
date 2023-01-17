@@ -38,7 +38,7 @@ $.getJSON('/Times', {
           break 
           case "fadjr" :
             $(".lines").removeClass("active")
-            $("#night_last_third , #fajr  ").addClass("active")   
+            $("#night_last_third , #sunrise  ").addClass("active")   
           break 
           case "sunrise" :
             $(".lines").removeClass("active")

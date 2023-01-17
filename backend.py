@@ -26,11 +26,12 @@ def Times():
     prev_sunrise = ephem.localtime(myLocation.previous_rising(ephem.Sun(), use_center=True) )
     next_noon  = ephem.localtime( myLocation.next_transit(ephem.Sun() )   )
     prev_noon  = myLocation.previous_transit(ephem.Sun() )   
-    next_sunset = ephem.localtime(myLocation.next_setting(ephem.Sun(), use_center=False)  )
-    prev_sunset = ephem.localtime(myLocation.previous_setting( ephem.Sun(), use_center=False) )
+    next_sunset = ephem.localtime(myLocation.next_setting(ephem.Sun(), use_center=True)  )
+    prev_sunset = ephem.localtime(myLocation.previous_setting( ephem.Sun(), use_center=True) )
+    maghreb = ephem.localtime(myLocation.previous_setting( ephem.Sun(), use_center=False) )
     icha = ephem.localtime(myLocation18.next_setting(ephem.Sun(), use_center=False)  )
     
-    half_night = next_sunrise - ( next_sunrise - next_sunset) /  2  
+    half_night = next_sunrise - ( next_sunrise - prev_sunset) /  2  
     
     fadjr  = ephem.localtime(myLocation18.next_rising(ephem.Sun(), use_center=False)  )
 
@@ -38,10 +39,6 @@ def Times():
     night_time = next_sunrise.timestamp() - prev_sunset.timestamp()
     day_time = next_sunset.timestamp() - prev_sunrise.timestamp()
 
-    asrtime =  datetime.datetime(2023,1,16,15,37,0)
-
-        
-    print ( datetime.datetime.fromtimestamp( next_sunset.timestamp() -  11.6861800697 / 50 * day_time) )
     
     asr = datetime.datetime.fromtimestamp( next_sunset.timestamp() -  11.6861800697 / 50 * day_time)
 
@@ -55,7 +52,7 @@ def Times():
     
     """
 
-    listOftimes = {"sunset" : next_sunset ,"half_night" : half_night , "icha" : icha , "fadjr" : fadjr , "sunrise" : next_sunrise  , "next_noon" : next_noon , "asr" : asr   }
+    listOftimes = {"sunset" : next_sunset ,"maghreb": maghreb , "half_night" : half_night , "icha" : icha , "fadjr" : fadjr , "sunrise" : next_sunrise  , "next_noon" : next_noon , "asr" : asr   }
     listOftimes =  dict(sorted(listOftimes.items(), key=lambda item: item[1]))   
     listOftimes = {k:v for k, v in listOftimes.items() if v > now}
 
