@@ -15,7 +15,9 @@ body {
   overflow: hidden;
 }
      #panel { 
-      float: left;
+      direction: rtl;
+      float:   right;
+      text-align: right;
     position: relative;
     background-color: aliceblue;
      }

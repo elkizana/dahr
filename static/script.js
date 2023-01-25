@@ -12,14 +12,25 @@ $.getJSON('/Times', {
   horizon : 0  //document.getElementsByName("horizon_selection")[0].value ,
 }, function(pythonResponse) {
     let percent =  pythonResponse["percent"]
-     //console.log( pythonResponse["next_time"] )
+     console.log( percent ) 
 
        $("#panel").html( moment.utc().local().format(' YYYY-MM-DD HH:mm:ss') + "<br>" );
-     
-      for( key in pythonResponse) {
-        $("#panel").append(  key  + " : " + pythonResponse[key] + "<br>") 
-        }
+       $("#panel").append(  "الفجر" + " : "  + pythonResponse["fadjr"]  +  "<br>"    )  
+       $("#panel").append(  " الطلوع" + " : "  + pythonResponse["sunrise"]  +  "<br>"    )  
+       $("#panel").append(  "نصف النهار" + " : "  + pythonResponse["noon"]  +  "<br>"    )  
+       $("#panel").append(  "العصر" + " : "  + pythonResponse["asr"]  +  "<br>"    )  
 
+       $("#panel").append(  "الغروب" + " : "  + pythonResponse["maghreb"]  +  "<br>"    )  
+
+       $("#panel").append(  "العشاء" + " : "  + pythonResponse["icha"]  +  "<br>"    )  
+       $("#panel").append(  "نصف الليل" + " : "  + pythonResponse["half_night"]  +  "<br>"    )  
+       $("#panel").append(  "الظل" + " : "  + pythonResponse["shadow"]  +  "<br>"    )  
+
+     
+     /*    for( key in pythonResponse) {
+        $("#panel").append(  key  + " : " + pythonResponse[key] + "<br>") 
+        } 
+ */
         let progressCircle = document.querySelector(".progress");
         let radius = progressCircle.r.baseVal.value;
         let circumference = radius * 2 * Math.PI;
