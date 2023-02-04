@@ -8,51 +8,61 @@ html, body {
 }
 
 body { 
-  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
-  
+ // background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+ background: white ;
   font-size: 19px ; 
   height: 100% ;
-  overflow: hidden;
+  //overflow: hidden;
 }
      #panel { 
+      height: 100%;
+      padding-right: 5px;
       direction: rtl;
       float:   right;
-      text-align: right;
-    position: relative;
-    background-color: aliceblue;
+      background-color: rgb(157, 193, 224);
      }
-   
+   #svg_div {
+    border: solid red 1px;
+    height: 100%;
+    width: 100%;
+   }
 svg { 
-  //border: solid white 1px;
-  border-radius : 200px ;  
- display: block ; 
- margin: auto  ; 
- margin-top:   115px ;  
+  
+  
+  background-color: black;
+  margin : auto ; 
+  display: flex;   
+  justify-content: center ;
+  
+  /* border : red solid  1px ;  */
+
 }
   .track {
     stroke-width: 1;
     stroke: lightgrey;
     fill: none;
-
 }
 
 .progress {
-    stroke-width: 5;
-    stroke: rgb(205, 49, 49);
+    stroke-width: 1;
+    stroke: rgb(24, 69, 8);
     fill: none;
     transform: rotateY(180deg);
     transform-origin: center;
-    
 }
 .lines  { 
-  stroke: rgb(255, 255, 255);
-  stroke-dasharray : 2 ;
-  stroke-width: .5 ;
-  
+  stroke: white ; 
+  stroke-dasharray : .5 ;
+  stroke-width: .1 ;
   }
 .active {
   stroke: rgb(77, 217, 31);
-  stroke-width: 1 ;
+  stroke-width: .2 ;
+
+}
+
+.circle_times {
+fill : rgb(207, 182, 182)  ; 
 
 }
 

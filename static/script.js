@@ -12,20 +12,37 @@ $.getJSON('/Times', {
   horizon : 0  //document.getElementsByName("horizon_selection")[0].value ,
 }, function(pythonResponse) {
     let percent =  pythonResponse["percent"]
-     console.log( percent ) 
+       console.log( moment( pythonResponse["last_third"] ).utc().format('YYYY-MM-DD HH:mm:ss') )
 
-       $("#panel").html( moment.utc().local().format(' YYYY-MM-DD HH:mm:ss') + "<br>" );
-       $("#panel").append(  "الفجر" + " : "  + pythonResponse["fadjr"]  +  "<br>"    )  
-       $("#panel").append(  " الطلوع" + " : "  + pythonResponse["sunrise"]  +  "<br>"    )  
-       $("#panel").append(  "نصف النهار" + " : "  + pythonResponse["noon"]  +  "<br>"    )  
-       $("#panel").append(  "العصر" + " : "  + pythonResponse["asr"]  +  "<br>"    )  
+       $("#panel").html(    moment().format("YYYY/M/D h:mm:ss")    + "<br>" );
+       $("#panel").append(  "الفجر" + " : "  + moment( pythonResponse["fadjr"] ).utc().format('HH:mm:ss')  +  "<br>"    )  
+       $("#panel").append(  " الطلوع" + " : "  + moment( pythonResponse["sunrise"] ).utc().format('HH:mm:ss') +  "<br>"    )  
+       $("#panel").append(  "نصف النهار" + " : "  + moment( pythonResponse["noon"] ).utc().format('HH:mm:ss')  +  "<br>"    )  
+       $("#panel").append(  "العصر" + " : "  + moment( pythonResponse["asr"] ).utc().format('HH:mm:ss')  +  "<br>"    )  
 
-       $("#panel").append(  "الغروب" + " : "  + pythonResponse["maghreb"]  +  "<br>"    )  
+       $("#panel").append(  "المغرب" + " : "  + moment( pythonResponse["maghreb"] ).utc().format('HH:mm:ss') +  "<br>"    )  
 
-       $("#panel").append(  "العشاء" + " : "  + pythonResponse["icha"]  +  "<br>"    )  
-       $("#panel").append(  "نصف الليل" + " : "  + pythonResponse["half_night"]  +  "<br>"    )  
-       $("#panel").append(  "الظل" + " : "  + pythonResponse["shadow"]  +  "<br>"    )  
+       $("#panel").append(  "العشاء" + ":"  + moment( pythonResponse["icha"] ).utc().format('HH:mm:ss') +  "<br>"    )  
+       $("#panel").append(  "نصف الليل" + " : "  + moment( pythonResponse["half_night"] ).utc().format('HH:mm:ss')  +  "<br>"    )  
+       $("#panel").append(  "الثلث الآخر" + " : "  + moment( pythonResponse["last_third"] ).utc().format('HH:mm:ss')  +  "<br>"    )  
 
+       pythonResponse["shadow"] != 0 ? $("#panel").append(  "الظل" + " : "  +  pythonResponse["shadow"]  +  "<br>"    )   :  null    
+       $("#panel").append(  "بقي" + " : "  + pythonResponse["remaining"]  +  "<br>"    )  
+       
+       $("#sunset_time").html(moment( pythonResponse["sunset"] ).utc().format('HH:mm:ss'))
+       $("#icha_time").html(moment( pythonResponse["icha"] ).utc().format('HH:mm:ss'))
+
+       $("#half_night_time").html(moment( pythonResponse["half_night"] ).utc().format('HH:mm:ss'))
+       $("#last_third_time").html(moment( pythonResponse["last_third"] ).utc().format('HH:mm:ss'))
+
+       $("#fadjr_time").html(moment( pythonResponse["fadjr"] ).utc().format('HH:mm:ss'))
+       $("#sunrise_time").html(moment( pythonResponse["sunrise"] ).utc().format('HH:mm:ss'))
+
+      $("#noon_time").html(moment( pythonResponse["noon"] ).utc().format('HH:mm:ss'))
+      $("#asr_time").html(moment( pythonResponse["asr"] ).utc().format('HH:mm:ss'))
+
+
+        
      
      /*    for( key in pythonResponse) {
         $("#panel").append(  key  + " : " + pythonResponse[key] + "<br>") 

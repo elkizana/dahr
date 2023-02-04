@@ -32,42 +32,41 @@ def Times():
     next_sunset = ephem.localtime(myLocation.next_setting(ephem.Sun(), use_center=True)  )
     prev_sunset = ephem.localtime(myLocation.previous_setting( ephem.Sun(), use_center=True) )
     
-    
-    
     whole_time = next_sunset.timestamp() - prev_sunset.timestamp()
-
 
     if ephem.Sun(myLocation).alt <  0 :
         day_time = next_sunset.timestamp() - next_sunrise.timestamp()
         night_time = next_sunrise.timestamp() - prev_sunset.timestamp()
         half_night = prev_sunset + (next_sunrise - prev_sunset) / 2 
-        shadow = "لا ظل"
+        last_third = next_sunrise - (next_sunrise - prev_sunset) / 3
+        shadow = 0 
 
-        #print("night")
+        print(last_third)
     else :
         #print('day')
         day_time = next_sunset.timestamp() - prev_sunrise.timestamp()
         night_time = next_sunrise.timestamp() - next_sunset.timestamp()
         half_night = next_sunset + (next_sunrise - next_sunset) / 2 
+        last_third = next_sunrise - (next_sunrise  - next_sunset ) / 3
+
         shadow = (1  / math.tan(ephem.Sun(myLocation).alt))  
 
     
     asr = datetime.datetime.fromtimestamp( next_sunset.timestamp() -  11.6861800697 / 50 * day_time)
     maghreb = ephem.localtime(myLocation.next_setting( ephem.Sun(), use_center=False) )
-    icha = ephem.localtime(myLocation18.next_setting(ephem.Sun(), use_center=False)  )
-
-    
+    icha = ephem.localtime(myLocation18.next_setting(ephem.Sun(), use_center=True)  )
     
 
-    listOftimes = {"sunset" : next_sunset , "maghreb" : maghreb  , "icha" : icha , "half_night" : half_night , "fadjr" : fadjr , "sunrise" : next_sunrise  , "noon" : next_noon , "asr" : asr   }
-    listOftimes =  dict(sorted(listOftimes.items(), key=lambda item: item[1]))   
-    listOftimes = {k:v for k, v in listOftimes.items() if v > now}
-    
-    next_time = next(   iter(listOftimes)  )
+    listOftimes = { "now"  : now , "sunset" : next_sunset , "maghreb" : maghreb  , "icha" : icha , "half_night" : half_night , "last_third" : last_third , "fadjr" : fadjr , "sunrise" : next_sunrise  , "noon" : next_noon , "asr" : asr   }
+    listOftimes = {k: v for k, v in sorted(listOftimes.items(), key=lambda item: item[1])}  
+
+    keys = list(listOftimes.keys() )
+    next_time = keys[ keys.index("now") +1]
+
     listOftimes["next_time"] = next_time
-    listOftimes["shadow"] = shadow
-    print(next_time)
-    
+    listOftimes["shadow"] = round(shadow, 2) 
+    listOftimes['remaining'] = str(listOftimes[listOftimes["next_time"]]  - now ).split(".")[0]
+
     if  next_time == "icha" or next_time == "sunrise"  or next_time == "half_night" or next_time == "fadjr" :
         elapsed_night_time =  now.timestamp() - prev_sunset.timestamp()
         half_night = datetime.datetime.fromtimestamp( prev_sunset.timestamp() +  night_time / 2 )
@@ -76,7 +75,6 @@ def Times():
     else :
         elapsed_day_time = now.timestamp() - prev_sunrise.timestamp()
         listOftimes["percent"] = (elapsed_day_time /  day_time) * 50 + 50
-        #print(listOftimes)
         return listOftimes 
        
   

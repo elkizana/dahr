@@ -16,28 +16,62 @@
 
 <body>
 
- <div id="panel">
+<!--  <div id="panel">
  
-  </div>
-
-  <svg width="400" height="400" >
-    <line class="lines" id="sunset"    x1="50%" y1="50%"   x2="0%" y2="50%"   />
+  </div> -->
+<!-- <div id="svg_div"> --> 
+  <svg style="width: 100%; height: 100%;" viewBox="0 0 100 100">
+    <!--     <line class="lines" id="sunset"    x1="50%" y1="50%"   x2="0%" y2="50%"   />
     <line class="lines"  id="half_night"    x1="50%" y1="50%"   x2="50%" y2="100%"   />
     <line class="lines"  id="night_last_third"    x1="50%" y1="50%"   x2="79%" y2="100%"   />
     <line class="lines"  id="sunrise"    x1="50%" y1="50%"   x2="100%" y2="50%"   />
-    <line class="lines"  id="day_first_quarter"    x1="50%" y1="50%"   x2="100%" y2="0%"   />
+     <line class="lines"  id="day_first_quarter"    x1="50%" y1="50%"   x2="100%" y2="0%"   /> -->
     
-    <line class="lines"  id="noon"    x1="50%" y1="50%"   x2="50%" y2="0%"   />
-    <line class="lines"  id="asr"    x1="50%" y1="50%"   x2="00%" y2="6%"  />
+<!--     <line class="lines"  id="noon"    x1="50%" y1="50%"   x2="50%" y2="0%"   />
+    <line class="lines"  id="asr"     />
     <line class="lines"  id="icha"    x1="50%" y1="50%"   x2="0%" y2="67.7%"  />
-    <line class="lines"  id="fadjr"    x1="50%" y1="50%"   x2="100%" y2="67.7%"  />
+    <line class="lines"  id="fadjr"    x1="50%" y1="50%"   x2="100%" y2="67.7%"  /> --> 
+
+    <line  class="lines" id="sunset"  x1="50" y1="50" x2="0" y2="50.00000000000001" stroke="black"></line>
+    <line class="lines"  id="icha"  x1="50" y1="50" x2="3.0158933468199294" y2="67.10244783657006" stroke="black"></line>
+    <line class="lines"  id="half_night" x1="50" y1="50" x2="50" y2="100" stroke="black"></line>
+    <line class="lines"  id="night_last_third"  x1="50" y1="50" x2="74.9999999999093" y2="93.30127018927429" stroke="black"></line>
+    <line class="lines"  id="fadjr"  x1="50" y1="50" x2="96.98410665318082" y2="67.102447836568" stroke="black"></line>
+    <line  class="lines" id="sunrise"  x1="50" y1="50" x2="100" y2="50" stroke="black"></line>
+    <line class="lines"  id="noon"  x1="50" y1="50" x2="49.99999999999999" y2="0" stroke="black"></line>
+    <line class="lines"  id="asr"  x1="50" y1="50" x2="12.883806466763467" y2="16.49793771118963" stroke="black"></line>
+
+
+<text class="circle_times" id="sunset_time" x="2" y="49" font-size="3" ></text>  
+<text class="circle_times" id="icha_time" x="5" y="65"   transform="rotate(-20, 5, 67)" font-size="3" ></text>  
+<text class="circle_times" id="half_night_time" x="51" y="87"  transform="rotate(90, 51, 87)" font-size="3" ></text>  
+ <text class="circle_times" id="last_third_time" x="68" y="80" transform="rotate(55, 68, 80)"  font-size="3"></text>  
+<text class="circle_times" id="fadjr_time" x="85" y="58"  transform="rotate(20, 73, 58)" font-size="3" ></text>  
+<text class="circle_times" id="sunrise_time" x="86" y="49"   font-size="3" >10:00</text>  
+<text class="circle_times" id="noon_time" x="51" y="3" transform="rotate(90, 51, 3)"  font-size="3" ></text>  
+<text class="circle_times" id="asr_time" x="10" y="20" transform="rotate(40, 10, 25)"  font-size="3" ></text>  
+
+
+
+
+
+
+
       
-      
-    <circle r="200" cx="200" cy="200" class="track"></circle>
-    <circle r="200" cx="200" cy="200" class="progress"></circle>
+<!--     <circle r="200" cx="200" cy="200" class="track"></circle>
+    <circle r="200" cx="200" cy="200" class="progress"></circle> -->
+    <circle cx="50" cy="50" r="49" fill="none" stroke="black"  class="track" />
+    <circle cx="50" cy="50" r="49" fill="none" stroke="black"  class="progress" />
+
+    <!-- <circle r="30%"  cx="50%" cy="50%" class="track"></circle>
+    <circle r="30%" cx="50%" cy="50%" class="progress"></circle> -->
           
     </svg>
 
+    
+
+
+    </script>
 
 </body>
 </html>
