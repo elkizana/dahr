@@ -1,0 +1,24 @@
+{
+  "name": "dahr_electron",
+  "version": "1.0.0",
+  "description": "5 prayer times ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "jquery": "3.7.0",
+    "moment": "^2.29.4",
+    "path": "0.12.7"
+  },
+  "devDependencies": {
+    "electron": "25.2.0",
+    "electron-builder": "23.6.0",
+    "electron-reloader": "1.1.0"
+  }
+}

@@ -1,0 +1,53 @@
+html{
+  font-family: "andalus" ;
+  font-size: 25px;
+  //background-color: black;
+  color: white;
+  //-webkit-app-region:drag; 
+  border-radius: 100px;
+  -webkit-app-region:drag
+}
+
+.container{
+  background-color:#03192f;
+  //transform: scale(0.94);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px; 
+  box-shadow: inset 0px -1px 10px 1px #f9f9f92e;
+}
+
+.content{
+  
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-bottom: 1px solid rgb(1 1 1);
+  margin-bottom: 15px ; 
+}
+td {
+  padding: 10px;
+  text-align: center;
+  }
+.numbers { 
+  color:green;
+}
+input{
+  width: 70px;
+  -webkit-app-region:no-drag
+}
+
+@font-face {
+  font-family: "gee" ;
+  src: url("GEElegantBold.ttf");
+  }
+
+  @font-face {
+    font-family: "andalus" ;
+    src: url("Andalus.ttf");
+    /* unicode-range: U+0641-U+064A   ;  U+30-39*/
+ 
+    }
+  

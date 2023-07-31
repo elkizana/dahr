@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <link rel="stylesheet" href="./css/style.css">
+
+<body>
+  
+    <div class="container">
+        <div class="content">
+ 
+ 
+  <table>
+
+<tr>
+  <td>الفجر</td>
+  <td>نصف النهار</td>
+  <td>العصر</td>
+  <td>المغرب</td>
+  <td>عشاء</td>
+</tr>
+
+
+  
+<tr>
+  <td class="numbers" id="fadjr"></td>
+  <td class="numbers" id="noon"></td>
+  <td class="numbers" id="asr"></td>
+  <td class="numbers" id="maghreb"></td>
+  <td class="numbers" id="icha"></td>
+</tr>
+
+</table>
+
+الآن : <span  class="numbers" id="now"> </span><br>
+بقي : <span  class="numbers" id="remaining"> </span><br>
+نصف الليل : <span  class="numbers" id="half_night"> </span><br>
+الثلث الآخر : <span  class="numbers"  id="last_third"> </span><br>
+طلوع الشمس : <span class="numbers" id="sunrise"> </span><br>
+ <span  class="numbers" id="shadow"> </span><br>
+خط الطول : <input type="text" name="" id="latitude"> خط العرض : <input type="text" name="" id="longtitude"> الإرتفاع  : <input type="text" name="" id="elevation">
+
+
+</div>
+</div>
+
+<script>
+
+  const $ = jQuery = require("jquery")
+  const moment = require('moment')
+  const { ipcRenderer } = require('electron');
+
+
+  
+  function formatDate(dateString) {
+    const dateObj = moment.utc(dateString, "ddd, DD MMM YYYY HH:mm:ss").local()
+    return dateObj.format('HH:mm:ss')
+  }
+
+  function makeGetRequest() {
+    let date =  moment.utc().format('YYYY-MM-DD HH:mm:ss ')  
+    let latitude = $("#latitude").val() //"36.805069"
+    let longtitude = $("#longtitude").val() //"3.041835"
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ipcRenderer.send('getSavedInputValue');
+    })
+
+    ipcRenderer.on('sendSavedInputValue', (event, savedInputObj) => {
+      $("#latitude").val(savedInputObj.input1)  
+      $("#longtitude").val(savedInputObj.input2)  
+      $("#elevation").val(savedInputObj.input3)  
+    })
+
+
+    $("input").on("change" , function() {
+      const inputObj = {
+        input1:       $("#latitude").val()   ,
+        input2:       $("#longtitude").val()   ,
+        input3:       $("#elevation").val()   ,
+      };
+      ipcRenderer.send('saveInputValue', inputObj);
+
+})
+    
+
+  
+
+    const url = `https://ardaarda.pythonanywhere.com/Times?lat=${latitude}&lng=${longtitude}&date=${date}&elevation=35&horizon=0`
+
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+          return response.json()
+      })
+      .then(data => {
+        //console.log(data)
+        $("#fadjr").html(formatDate(data.fadjr))
+        $("#noon").html(formatDate(data.noon))
+        $("#asr").html(formatDate(data.asr))
+        $("#maghreb").html(formatDate(data.maghreb))
+        $("#icha").html(formatDate(data.icha))
+        $("#now").html(formatDate(data.now))
+        $("#remaining").html(data.remaining)
+        $("#sunrise").html(formatDate(data.sunrise))
+        $("#shadow").val() > 0 ?  $("#shadow").html(data.shadow )  : null
+        $("#half_night").html(formatDate(data.half_night ) )  
+        $("#last_third").html(formatDate(data.last_third ) )
+
+      })
+
+      .catch(error => {
+        console.log("Error fetching data: ", error)
+      })
+ 
+    }
+
+    makeGetRequest()
+
+    setInterval(() => {
+      makeGetRequest()
+  
+}, 5000);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
