@@ -35,7 +35,7 @@
 نصف الليل : <span  class="numbers" id="half_night"> </span><br>
 الثلث الآخر : <span  class="numbers"  id="last_third"> </span><br>
 طلوع الشمس : <span class="numbers" id="sunrise"> </span><br>
- <span  class="numbers" id="shadow"> </span><br>
+الظل : <span  class="numbers" id="shadow">  </span><br>
 خط الطول : <input type="text" name="" id="latitude"> خط العرض : <input type="text" name="" id="longtitude"> الإرتفاع  : <input type="text" name="" id="elevation">
 
 
@@ -59,6 +59,7 @@
     let date =  moment.utc().format('YYYY-MM-DD HH:mm:ss ')  
     let latitude = $("#latitude").val() //"36.805069"
     let longtitude = $("#longtitude").val() //"3.041835"
+    let elevation = $("#elevation").val() 
 
     document.addEventListener('DOMContentLoaded', () => {
       ipcRenderer.send('getSavedInputValue');
@@ -76,7 +77,7 @@
         input1:       $("#latitude").val()   ,
         input2:       $("#longtitude").val()   ,
         input3:       $("#elevation").val()   ,
-      };
+      };  
       ipcRenderer.send('saveInputValue', inputObj);
 
 })
@@ -84,7 +85,7 @@
 
   
 
-    const url = `https://ardaarda.pythonanywhere.com/Times?lat=${latitude}&lng=${longtitude}&date=${date}&elevation=35&horizon=0`
+    const url = `https://ardaarda.pythonanywhere.com/Times?lat=${latitude}&lng=${longtitude}&date=${date}&elevation=${elevation}&horizon=0`
 
     fetch(url)
       .then(response => {
@@ -103,7 +104,8 @@
         $("#now").html(formatDate(data.now))
         $("#remaining").html(data.remaining)
         $("#sunrise").html(formatDate(data.sunrise))
-        $("#shadow").val() > 0 ?  $("#shadow").html(data.shadow )  : null
+        data.shadow  > 0 ?  $("#shadow").html(data.shadow )  : $("#shadow").hide()
+        
         $("#half_night").html(formatDate(data.half_night ) )  
         $("#last_third").html(formatDate(data.last_third ) )
 
